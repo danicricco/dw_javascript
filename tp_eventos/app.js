@@ -6,6 +6,7 @@
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
+var eventos = require('./routes/eventos');
 var http = require('http');
 var path = require('path');
 
@@ -19,9 +20,16 @@ app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
+app.use(express.cookieParser('uc_key'));
+app.use(express.session());
 app.use(app.router);
 app.use(require('stylus').middleware(__dirname + '/public'));
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(function errorHandler(err, req, res, next) {
+  res.status(500);
+  res.render('error', { error: err });
+});
 
 // development only
 if ('development' == app.get('env')) {
@@ -32,6 +40,7 @@ app.get('/', routes.index);
 app.get('/users', user.list);
 app.get('/inicioCargaEventoFamiliar', routes.inicioCargaEventoFamiliar);
 app.get('/inicioCargaEventoEmpresarial', routes.inicioCargaEventoEmpresarial);
+app.get('/eventos/eventosPosibles',eventos.eventosPosibles);
 
 
 http.createServer(app).listen(app.get('port'), function(){
