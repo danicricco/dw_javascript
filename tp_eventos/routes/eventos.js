@@ -2,18 +2,19 @@
 //aca guardamos los dos tipos de evento y sus subclasificaciones
 var eventos={
     'familiar':[
-        {id:'boda',title:'Casamiento'},
-        {id:'bautismo',title:'Bautismo'},
-        {id:'navidad',title:'Navidad'},
-        {id:'cumple',title:'Cumpleaños de 15'}
+        {id:'boda',title:'Casamiento',description:'Un casamiento es un...'},
+        {id:'bautismo',title:'Bautismo',description:'Para Bautismo es fundamental...'},
+        {id:'navidad',title:'Navidad',description:'Din din doon.'},
+        {id:'cumple',title:'Cumpleaños de 15',description:'akarasyyyy'}
     ],
     'empresarial':[
-        {id:'lanzamiento',title:'Lanzamiento de producto'},
-        {id:'workshop',title:'Workshop'},
-        {id:'brindis_final',title:'Brindis de fin de año'}
+        {id:'lanzamiento',title:'Lanzamiento de producto',description:'Lo fundamental es '},
+        {id:'workshop',title:'Workshop',description:'Workshop... dkkk'},
+        {id:'brindis_final',title:'Brindis de fin de año',description:'brindis final'}
     ]
     
 };
+
 
 exports.eventosPosibles = function(req, res){
  

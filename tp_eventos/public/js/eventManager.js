@@ -3,12 +3,16 @@
 //y las llamadas ajax al servidor
 
 
-var manejadorEventos=function(){
+var ManejadorEventos=function(){
   
     var that={};
     that.crearEventoFamiliar=function(){
     };
     that.crearEventoEmpresarial=function(){
+    };
+    that.getTipoEventos=function(){
+        var ajaxRequest={url:'/eventos/eventosPosibles'};
+        return $.ajax(ajaxRequest);
     };
     return that;
 };
