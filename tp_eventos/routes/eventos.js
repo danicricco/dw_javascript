@@ -20,6 +20,7 @@ var eventosPosibles={
 var configurationPorTipo={
  'boda':['lugar','entrada','plato_fuerte','postre','dj','sacerdote','mesa_dulces'],
  'cumple':['lugar','entrada','plato_fuerte','postre','dj'],    
+ 'workshop':['lugar','presentador','musica','proyector']
 };
 
 
@@ -49,6 +50,9 @@ var EventDAO=function(){
     };
     that.list=function(){
         return eventos;
+    };
+    that.configurar=function(eventId,actividades){
+        eventos[eventId].actividades=actividades;
     };
     return that;
 };
@@ -119,6 +123,11 @@ function agregarEventosDePrueba(){
     eventDAO.agregarEvento({name:'Mi cumple',tipo:'cumple',fecha_aprox:'2013-01-10',presupuesto_min:10,presupuesto_max:50});
     eventDAO.agregarEvento({name:'Iphone 6',tipo:'workshop',fecha_aprox:'2014-01-10',presupuesto_min:1000,presupuesto_max:50000});
 };
+function configurarDePrueba(){
+    eventDAO.configurar(1,['lugar','entrada','plato_fuerte']);
+    eventDAO.configurar(2,['lugar','presentador']);
+};
 agregarEventosDePrueba();
+configurarDePrueba();
 
 
