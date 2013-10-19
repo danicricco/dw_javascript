@@ -27,3 +27,11 @@ exports.eventosPosibles = function(req, res){
  }
  
 }
+
+exports.iniciarCargaEvento=function(req,res){
+  var tipoEvento=req.params.tipoEvento;
+  //guarda en la session el tipo de evento que se eligio
+  req.session.cargaEvento={};
+  req.session.cargaEvento.tipoEvento=tipoEvento;  
+  res.render("cargaEventos");
+};

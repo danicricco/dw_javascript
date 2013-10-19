@@ -36,11 +36,19 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+//Inicio de pantalla 1 - Home
 app.get('/', routes.index);
-app.get('/users', user.list);
+
+
+//Inicio de pantalla 2 - Eleccion de tipo de evento
 app.get('/inicioCargaEventoFamiliar', routes.inicioCargaEventoFamiliar);
 app.get('/inicioCargaEventoEmpresarial', routes.inicioCargaEventoEmpresarial);
+
+//Llamada ajax para obtener los tipos de eventos posibles
 app.get('/eventos/eventosPosibles',eventos.eventosPosibles);
+
+//Inicio de pantalla 3 - Datos Generales del evento
+app.get('/agregarEvento/:tipoEvento',eventos.iniciarCargaEvento);
 
 
 http.createServer(app).listen(app.get('port'), function(){
