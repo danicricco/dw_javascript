@@ -50,6 +50,7 @@ app.get('/eventos/eventosPosibles',eventos.eventosPosibles);
 //Inicio de pantalla 3 - Datos Generales del evento
 app.get('/agregarEvento/:tipoEvento',eventos.iniciarCargaEvento);
 
+app.post('/eventos/cargarEvento',eventos.cargarEvento);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

@@ -1,6 +1,6 @@
 //esto es un objeto que simula los datos guardados en la BD
 //aca guardamos los dos tipos de evento y sus subclasificaciones
-var eventos={
+var eventosPosibles={
     'familiar':[
         {id:'boda',title:'Casamiento',description:'Un casamiento es un...'},
         {id:'bautismo',title:'Bautismo',description:'Para Bautismo es fundamental...'},
@@ -16,12 +16,32 @@ var eventos={
 };
 
 
+//Esta clase simula el acceso a la BD
+var EventDAO=function(){
+    var that={};
+    // una bolsa donde se agregan todos los eventos
+    var eventos=[];
+    //agrega el evento dentro de la lista
+    that.agregarEvento=function(evento){
+        evento.id=eventos.length;
+        eventos[evento.id]=evento;
+    };
+    that.modificarEvento=function(evento){
+        if(evento && evento.id){
+            eventos[evento.id]=evento;
+        }
+        throw 'Evento no valido. Debe tener un id';
+    };
+    return that;
+};
+
+var eventDAO=EventDAO();
 exports.eventosPosibles = function(req, res){
  
  if(req.session.tipoEvento){
      //solo si el tipoEvento esta definido en la session
      //retorna los eventos de ese tipo
-     res.send(eventos[req.session.tipoEvento]);
+     res.send(eventosPosibles[req.session.tipoEvento]);
  }else{
      res.send(500,'El tipo de evento no fue inicializado');
  }
@@ -34,4 +54,9 @@ exports.iniciarCargaEvento=function(req,res){
   req.session.cargaEvento={};
   req.session.cargaEvento.tipoEvento=tipoEvento;  
   res.render("cargaEventos");
+};
+
+//Llamada ajax que agrega un evento
+exports.cargarEvento=function(req,res){
+    
 };
