@@ -24,11 +24,29 @@ var configurationPorTipo={
 };
 
 
-//Este es un mapa desde el tipo de actividad 
-//a las ofertas disponibles
-var ofertas={    
-};
 
+var OfertasDAO=function(){
+    var that={};
+    //es un mapa desde la actividad a las ofertas disponibles
+    var mapaOfertas={};
+    
+    that.agregarOferta=function(oferta){
+        var ofertas=mapaOfertas[oferta.actividad];
+        if(!ofertas){
+            ofertas=[];
+        }
+        ofertas[ofertas.length]=oferta;
+        mapaOfertas[oferta.actividad]=ofertas;
+    };
+    that.listOfertas=function(actividad){
+        var ofertas=mapaOfertas[actividad];
+        if(ofertas){
+            return ofertas;
+        }
+        return [];
+    };
+    return that;
+};
 //Esta clase simula el acceso a la BD
 var EventDAO=function(){
     var that={};
@@ -58,6 +76,8 @@ var EventDAO=function(){
 };
 
 var eventDAO=EventDAO();
+var ofertasDAO=OfertasDAO();
+
 exports.eventosPosibles = function(req, res){
  
  if(req.session.tipoEvento){
@@ -87,6 +107,7 @@ exports.listarEventos=function(req,res){
     res.send(eventDAO.list());
 };
 
+//Inicia la pantalla 4 - Configuracion, eleccion de actividades
 exports.iniciarConfiguracion=function(req,res){
   var idEvento=req.query.evento_id;
   var evento=eventDAO.getEvento(idEvento);
@@ -104,6 +125,7 @@ exports.configurarEvento=function(req,res){
     
 };
 
+//Inicia la pantalla 5 - El libro
 exports.iniciarLibroEvento=function(req,res){
     var idEvento=req.query.evento_id;
     res.render("libro",{'evento_id':idEvento});
@@ -114,6 +136,17 @@ exports.obtenerEvento=function(req,res){
     res.send(eventDAO.getEvento(idEvento));
 };
 
+exports.iniciarOferta=function(req,res){
+    var idEvento=req.query.evento_id;
+    var actividad=req.query.actividad;
+    res.render("ofertas",{'evento_id':idEvento,'actividad':actividad});
+};
+exports.listarOfertas=function(req,res){
+    var actividad=req.query.actividad;
+    var ofertas=ofertasDAO.listOfertas(actividad);
+    res.send(ofertas);
+    
+};
 //---------------------------------------------------------------------
 //funciones para agregar datos de prueba
 //---------------------------------------------------------------------
@@ -127,7 +160,15 @@ function configurarDePrueba(){
     eventDAO.configurar(1,['lugar','entrada','plato_fuerte']);
     eventDAO.configurar(2,['lugar','presentador']);
 };
+function cargarOfertasPrueba(){
+    ofertasDAO.agregarOferta({'actividad':'lugar','nombre':'Belvedere','precio':5000,'description':'Un lugar bonito'});
+    ofertasDAO.agregarOferta({'actividad':'lugar','nombre':'Sheraton','precio':15000,'description':'Un lugar lujoso'});
+     
+    ofertasDAO.agregarOferta({'actividad':'plato_fuerte','nombre':'Tia Techa','precio':5000,'description':'Ricas empanadas'});
+    ofertasDAO.agregarOferta({'actividad':'plato_fuerte','nombre':'Mc donal','precio':15000,'description':'las hamburguesas'});
+    
+};
 agregarEventosDePrueba();
 configurarDePrueba();
-
+cargarOfertasPrueba();
 

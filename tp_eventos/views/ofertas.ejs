@@ -4,8 +4,9 @@
       <link href="/css/eventos.css" rel="stylesheet">
   </head>
     <body>
-        <p>El libro del evento</p>
+        <p>Las ofertas disponibles para </p>
          <h1><%= evento_id %> </h1>
+        <h1><%= actividad %> </h1>
         <input type="hidden" value="<%= evento_id %>" id="eventId" />
         <input type="hidden" value="<%= actividad %>" id="actividad" />
         
@@ -13,6 +14,10 @@
         <script src="/js/eventManager.js"></script>
         <!--
             
+Crear tu propio archivo js
+Llamar a ofertas/list?actividad=plato_fuerte
+
+Obtener la lista de ofertas para la actividad, pintarlas y luego dar la capacidad para elegir una
 
         -->
     </body>

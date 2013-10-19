@@ -65,6 +65,10 @@ app.get('/libro',eventos.iniciarLibroEvento);
 
 app.get('/evento',eventos.obtenerEvento);
 
+app.get('/ofertas',eventos.iniciarOferta);
+
+app.get('/ofertas/list',eventos.listarOfertas);
+
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
