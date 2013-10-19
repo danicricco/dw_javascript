@@ -91,10 +91,24 @@ exports.iniciarConfiguracion=function(req,res){
 };
 exports.listaDeActividades=function(req,res){
     var tipoEvento=req.params.tipoEvento;
-    return res.send(configurationPorTipo[tipoEvento]);
+     res.send(configurationPorTipo[tipoEvento]);
 };
 
 
+//recibe la lista de actividades que se pueden asignar a un evento
+exports.configurarEvento=function(req,res){
+    
+};
+
+exports.iniciarLibroEvento=function(req,res){
+    var idEvento=req.query.evento_id;
+    res.render("libro.ejs",{'evento_id':idEvento});
+};
+
+exports.obtenerEvento=function(req,res){
+    var idEvento=req.query.evento_id;
+    res.send(eventDAO.getEvento(idEvento));
+};
 
 //---------------------------------------------------------------------
 //funciones para agregar datos de prueba

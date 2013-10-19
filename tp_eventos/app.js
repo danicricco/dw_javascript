@@ -61,6 +61,10 @@ app.get('/eventos/list',eventos.listarEventos);
 //Retorna una lista de las actividades que puede tener un tipo de evento
 app.get('/configuracion/:tipoEvento',eventos.listaDeActividades);
 
+app.get('/libro',eventos.iniciarLibroEvento);
+
+app.get('/evento',eventos.obtenerEvento);
+
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
