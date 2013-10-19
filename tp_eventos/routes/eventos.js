@@ -16,6 +16,18 @@ var eventosPosibles={
 };
 
 
+//este es un mapa desde el tipo de evento con todas las actividades que se requiren
+var configurationPorTipo={
+ 'boda':['lugar','entrada','plato_fuerte','postre','dj','sacerdote','mesa_dulces'],
+ 'cumple':['lugar','entrada','plato_fuerte','postre','dj'],    
+};
+
+
+//Este es un mapa desde el tipo de actividad 
+//a las ofertas disponibles
+var ofertas={    
+};
+
 //Esta clase simula el acceso a la BD
 var EventDAO=function(){
     var that={};
@@ -31,6 +43,12 @@ var EventDAO=function(){
             eventos[evento.id]=evento;
         }
         throw 'Evento no valido. Debe tener un id';
+    };
+    that.getEvento=function(id){
+        return eventos[id];
+    };
+    that.list=function(){
+        return eventos;
     };
     return that;
 };
@@ -60,3 +78,33 @@ exports.iniciarCargaEvento=function(req,res){
 exports.cargarEvento=function(req,res){
     
 };
+
+exports.listarEventos=function(req,res){
+    res.send(eventDAO.list());
+};
+
+exports.iniciarConfiguracion=function(req,res){
+  var idEvento=req.query.evento_id;
+  var evento=eventDAO.getEvento(idEvento);
+  res.render("configurationEvento",{'evento_id':idEvento,tipoEvento:evento.tipo});
+    
+};
+exports.listaDeActividades=function(req,res){
+    var tipoEvento=req.params.tipoEvento;
+    return res.send(configurationPorTipo[tipoEvento]);
+};
+
+
+
+//---------------------------------------------------------------------
+//funciones para agregar datos de prueba
+//---------------------------------------------------------------------
+
+function agregarEventosDePrueba(){
+    eventDAO.agregarEvento({name:'Mi casamiento',tipo:'boda',fecha_aprox:'2013-01-10',presupuesto_min:10,presupuesto_max:50});
+    eventDAO.agregarEvento({name:'Mi cumple',tipo:'cumple',fecha_aprox:'2013-01-10',presupuesto_min:10,presupuesto_max:50});
+    eventDAO.agregarEvento({name:'Iphone 6',tipo:'workshop',fecha_aprox:'2014-01-10',presupuesto_min:1000,presupuesto_max:50000});
+};
+agregarEventosDePrueba();
+
+

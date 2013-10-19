@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <link href="/css/eventos.css" rel="stylesheet">
+  </head>
+    <body>
+        <p>Inicio de la configuracion del evento</p>
+        <h1><%= evento_id %> </h1>
+        <input type="hidden" value="<%= evento_id %>" id="eventId" />
+        <input type="hidden" value="<%= tipoEvento %>" id="tipoEvento" />
+        
+        <div id="eventoInicio_tipoEvento_description" >
+        </div>
+        <script src="/js/jquery.js"></script>
+        <script src="/js/eventManager.js"></script>
+        
+        <!--
+            Crear un archivo JS propio para esta pagina
+           Leer los hidden del tipo de evento y el id del evento
+          Descargar la configuracion posible de un tipo de evento (ejemplo:/configuracion/boda )
+           Pintar la pantalla de acuerdo a la configuracion
+         -->
+    </body>
+</html>

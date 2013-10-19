@@ -52,6 +52,15 @@ app.get('/agregarEvento/:tipoEvento',eventos.iniciarCargaEvento);
 
 app.post('/eventos/cargarEvento',eventos.cargarEvento);
 
+//Inicio de pantalla 4 - Configuracion de evento
+app.get('/eventos/configurar',eventos.iniciarConfiguracion);
+
+//Listar los eventos
+app.get('/eventos/list',eventos.listarEventos);
+
+//Retorna una lista de las actividades que puede tener un tipo de evento
+app.get('/configuracion/:tipoEvento',eventos.listaDeActividades);
+
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
