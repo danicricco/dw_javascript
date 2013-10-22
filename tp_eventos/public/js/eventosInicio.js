@@ -26,6 +26,7 @@ $(document).ready(
     function(){
         //El objeto ManejadorEventos esta en eventManager.js (por lo tanto, este archivo se tiene que incluir primero )
         var manejadorEventos=ManejadorEventos();
-        manejadorEventos.getTipoEventos().done(mostrarTipoEventos);
+         var promise=manejadorEventos.getTipoEventos();
+        promise.done(mostrarTipoEventos);
     }
 );

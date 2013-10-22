@@ -20,5 +20,9 @@ var ManejadorEventos=function(){
         var ajaxRequest={url:'/eventos/eventosPosibles'};
         return $.ajax(ajaxRequest);
     };
+    that.getEventos=function(){
+        var ajaxRequest={url:'/eventos/list'};
+        return $.ajax(ajaxRequest);
+    }
     return that;
 };

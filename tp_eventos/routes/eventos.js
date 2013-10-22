@@ -71,7 +71,13 @@ var EventDAO=function(){
         return eventos;
     };
     that.configurar=function(eventId,actividades){
-        eventos[eventId].actividades=actividades;
+        if(eventos[eventId]){
+            eventos[eventId].actividades=actividades;
+        }else{
+            return null;
+        }
+        
+        
     };
     return that;
 };
@@ -121,10 +127,7 @@ exports.listaDeActividades=function(req,res){
 };
 
 
-//recibe la lista de actividades que se pueden asignar a un evento
-exports.configurarEvento=function(req,res){
-    
-};
+
 
 //Inicia la pantalla 5 - El libro
 exports.iniciarLibroEvento=function(req,res){
@@ -151,6 +154,20 @@ exports.listarOfertas=function(req,res){
 exports.agregarEvento=function(req,res){
   var eventoGuardado=eventDAO.agregarEvento(req.body);
     return res.send(eventoGuardado);
+};
+
+//Recibe un json y configura las actividades del evento
+//{evento_id:1,actividades:['lugar','entrada','plato_fuerte']);
+exports.configurarEvento=function(req,res){
+  var eventoId=req.body.evento_id;
+  var evento=eventDAO.getEvento(eventoId);
+  if(evento){
+      var eventoConfigurado=eventDAO.configurar(eventId,req.body.actividades);
+      res.send(200,eventoConfigurado);
+  }else{
+      res.send(404,'No se encontro el evento '+eventoId);
+  }
+    
 };
 //---------------------------------------------------------------------
 //funciones para agregar datos de prueba
