@@ -50,8 +50,6 @@ app.get('/eventos/eventosPosibles',eventos.eventosPosibles);
 //Inicio de pantalla 3 - Datos Generales del evento
 app.get('/agregarEvento/:tipoEvento',eventos.iniciarCargaEvento);
 
-app.post('/eventos/cargarEvento',eventos.cargarEvento);
-
 //Inicio de pantalla 4 - Configuracion de evento
 app.get('/eventos/configurar',eventos.iniciarConfiguracion);
 

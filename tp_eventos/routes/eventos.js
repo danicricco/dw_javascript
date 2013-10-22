@@ -105,10 +105,7 @@ exports.iniciarCargaEvento=function(req,res){
   res.render("cargaEventos");
 };
 
-//Llamada ajax que agrega un evento
-exports.cargarEvento=function(req,res){
-    
-};
+
 
 exports.listarEventos=function(req,res){
     res.send(eventDAO.list());
@@ -125,9 +122,6 @@ exports.listaDeActividades=function(req,res){
     var tipoEvento=req.params.tipoEvento;
      res.send(configurationPorTipo[tipoEvento]);
 };
-
-
-
 
 //Inicia la pantalla 5 - El libro
 exports.iniciarLibroEvento=function(req,res){
