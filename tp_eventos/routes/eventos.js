@@ -56,6 +56,7 @@ var EventDAO=function(){
     that.agregarEvento=function(evento){
         evento.id=eventos.length;
         eventos[evento.id]=evento;
+        return evento;
     };
     that.modificarEvento=function(evento){
         if(evento && evento.id){
@@ -146,6 +147,10 @@ exports.listarOfertas=function(req,res){
     var ofertas=ofertasDAO.listOfertas(actividad);
     res.send(ofertas);
     
+};
+exports.agregarEvento=function(req,res){
+  var eventoGuardado=eventDAO.agregarEvento(req.body);
+    return res.send(eventoGuardado);
 };
 //---------------------------------------------------------------------
 //funciones para agregar datos de prueba
